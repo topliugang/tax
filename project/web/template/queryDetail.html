@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="container-fluid">
+	<form class="form-inline" action="/query_detail" role="search" method="post">
+
+		<!-- <div class="form-group"> -->
+		<label for="name">选择年份</label>
+		<select name="which_year" class="form-control">
+			{% for i in range(2015, 2020) %}
+			<option value ="{{i}}">{{ i }}</option>
+			{% end %}
+		</select>
+
+		<select name="which_month" class="form-control">
+			{% for i in range(1, 13) %}
+			<option value ="{{i}}">{{ i }}</option>
+			{% end %}
+		</select>
+
+		<button type="submit" class="btn btn-default form-control">查询</button>
+		
+
+	</form>
+	
+
+
+	<h2 class="sub-header text-center">查询结果</h2>
+	<div class="table-responsive">
+		<table class="table table-hover table-striped" >
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>税务局</th>
+					<th>税务所</th>
+					<th>电子票号</th>
+					<th>纳税人</th>
+					<th>纳税金额</th>
+					<th>税款所属期起</th>
+					<th>税款所属期止</th>
+					<th>录入日期</th>
+					<th>上传日期</th>
+					<th>上传人</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				{% if taxdetails %}
+				{% for taxdetail in taxdetails %}
+				<tr>
+					<td>{{ taxdetail.id }}</td>
+					<td>{{ taxdetail.taxdepartment.name }}</td>
+					<td>{{ taxdetail.taxation.name }}</td>
+					<td>{{ taxdetail.taxcode }}</td>
+					<td>{{ taxdetail.taxpayer.name }}</td>
+					<td>{{ taxdetail.taxmoney }}</td>
+					<td>{{ taxdetail.tax_belong_start_date }}</td>
+					<td>{{ taxdetail.tax_belong_end_date }}</td>
+					<td>{{ taxdetail.record_datetime }}</td>
+					<td>{{ taxdetail.upload_date }}</td>
+					<td>{{ taxdetail.upload_user.name }}</td>
+				</tr>
+				{% end %}
+				{% end %}
+			</tbody>
+		</table>
+	</div>	
+
+</div>
+
+
+{% end %}

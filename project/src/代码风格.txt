@@ -1,0 +1,10 @@
+类的名字用驼峰
+其他用下划线
+
+名词：
+taxdepartment		税务机构(税务局)
+taxation			税务所
+taxpayer			纳税人
+taxdetail			税务记录明细
+taxcode				电子税票号
+taxmoney			缴税金额
