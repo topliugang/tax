@@ -32,6 +32,7 @@ class Application(tornado.web.Application):
             (r'/import', ImportHandler),
             (r'/upload_file', UploadFileHandler),
             (r'/query_detail',QueryDetailHandler),
+            (r'/query_class',QueryClassHandler),
         ]
         settings = dict(
             fucktitle = u"税务统计系统",
@@ -151,6 +152,16 @@ class QueryDetailHandler(tornado.web.RequestHandler):
         taxdetails = db_fucker.get_taxdetails_by_year_and_month(which_year, which_month)
         self.render('queryDetail.html', taxdetails = taxdetails)
 
+
+class QueryClassHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.render('queryClass.html', taxclassdata = None, which_year = None, which_month = None)
+
+    def post(self):
+        which_year = int(self.get_argument('which_year'))
+        which_month = int(self.get_argument('which_month'))
+        taxclassdata = db_fucker.get_tax_class_data(which_year, which_month)
+        self.render('queryClass.html', taxclassdata = taxclassdata, which_year = which_year, which_month = which_month)
 
 def main():
     tornado.options.parse_command_line()

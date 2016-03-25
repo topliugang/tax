@@ -213,7 +213,38 @@ def insert_tax_detail(data, which_year, which_month, user_id):
         close_db(cur, conn)
         
 
-
+def get_tax_class_data(which_year, which_month):
+    print 'get_tax_class_data'
+    try:
+        cur, conn = init_db()
+        sql = """
+            select taxdepartment_id, sum(taxmoney) from taxdetail 
+            where which_year = %s and which_month = %s
+            group by taxdepartment_id order by taxdepartment_id asc;
+        """
+        cur.execute(sql, (which_year, which_month))
+        result = cur.fetchall()
+        data = []
+        for row in result:
+            rowdata = []
+            taxdepartment = get_taxdepartment_by_id(row[0])
+            rowdata.append(taxdepartment)
+            rowdata.append('%.2f'%(row[1]/10000))
+            rowdata.append('%.2f'%(row[1]/10000))
+            rowdata.append('%.2f'%(row[1]/10000))
+            rowdata.append('%.2f'%(row[1]/10000))
+            rowdata.append('%.2f'%(row[1]/10000))
+            rowdata.append('%.2f'%(row[1]/10000))
+            rowdata.append('%.2f'%(row[1]/10000))
+            rowdata.append('%.2f'%(row[1]/10000))
+            
+            data.append(rowdata)
+        
+        return data
+    except MySQLdb.Error, e:
+        print 'mysql error %d: %s'%(e.args[0], e.args[1])
+    finally:
+        close_db(cur, conn) 
 
 
     

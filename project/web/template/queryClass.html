@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="container-fluid">
+	<form class="form-inline" action="/query_class" role="search" method="post">
+
+		<!-- <div class="form-group"> -->
+		<label for="name">选择年份</label>
+		<select name="which_year" class="form-control">
+			{% for i in range(2015, 2020) %}
+			<option value ="{{i}}">{{ i }}</option>
+			{% end %}
+		</select>
+
+		<select name="which_month" class="form-control">
+			{% for i in range(1, 13) %}
+			<option value ="{{i}}">{{ i }}</option>
+			{% end %}
+		</select>
+
+		<button type="submit" class="btn btn-default form-control">查询</button>
+		
+
+	</form>
+	<button id="exportBtn">Export</button>
+	
+
+
+	<h2 class="sub-header text-center">查询结果</h2>
+	<div class="table-responsive">
+		<table class="table table-hover  table-bordered table2excel" >
+			<thead>
+				<caption>枣庄市地税局工会经费代收情况统计表</caption>
+				<tr>
+					<td>填表单位：</td>
+					<td colspan="6">所属时期：{{ which_year }}年{{ which_month }}月</td>
+					<td colspan="2">单位：万元</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td rowspan="2">代收项目</td>
+					<td colspan="2">本月征收</td>
+					<td colspan="2">累计征收</td>
+					<td colspan="2">去年同期征收</td>
+					<td colspan="2">同比增长%（累计）</td>
+				</tr>
+				<tr>
+					<td>金额</td>
+					<td>其中，市级</td>
+					<td>金额</td>
+					<td>其中，市级</td>
+					<td>金额</td>
+					<td>其中，市级</td>
+					<td>金额</td>
+					<td>其中，市级</td>
+				</tr>
+				
+				{% if taxclassdata %}
+					{% for row in taxclassdata %}
+					<tr>
+					<td>{{row[0].name}}</td>
+					<td>{{row[1]}}</td>
+					<td>{{row[2]}}</td>
+					<td>{{row[3]}}</td>
+					<td>{{row[4]}}</td>
+					<td>{{row[5]}}</td>
+					<td>{{row[6]}}</td>
+					<td>{{row[7]}}</td>
+					<td>{{row[8]}}</td>
+		
+				</tr>
+				{%end%}
+				{%end%}
+			</tbody>
+		</table>
+	</div>	
+
+</div>
+
+<script type="text/javascript">
+$("#exportBtn").click(function(){
+  $(".table2excel").table2excel({
+	exclude: ".noExl",
+	name: "Excel Document Name",
+	filename: "myFileName",
+	fileext: ".xls",
+	exclude_img: true,
+	exclude_links: true,
+	exclude_inputs: true
+});
+});
+
+</script>
+
+
+{% end %}
