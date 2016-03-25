@@ -32,7 +32,8 @@ class Application(tornado.web.Application):
             (r'/import', ImportHandler),
             (r'/upload_file', UploadFileHandler),
             (r'/query_detail',QueryDetailHandler),
-            (r'/query_class',QueryClassHandler),
+            (r'/query_statistics',QueryStatisticsHandler),
+            (r'/query_detail_by_taxdepartment', QueryDetailByTaxdepartmentHandler),
         ]
         settings = dict(
             fucktitle = u"税务统计系统",
@@ -153,15 +154,40 @@ class QueryDetailHandler(tornado.web.RequestHandler):
         self.render('queryDetail.html', taxdetails = taxdetails)
 
 
-class QueryClassHandler(tornado.web.RequestHandler):
+class QueryStatisticsHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render('queryClass.html', taxclassdata = None, which_year = None, which_month = None)
+        self.render('queryStatistics.html', statisticsdata = None, which_year = None, which_month = None)
 
     def post(self):
         which_year = int(self.get_argument('which_year'))
         which_month = int(self.get_argument('which_month'))
-        taxclassdata = db_fucker.get_tax_class_data(which_year, which_month)
-        self.render('queryClass.html', taxclassdata = taxclassdata, which_year = which_year, which_month = which_month)
+        statisticsdata = db_fucker.get_tax_statistics_data(which_year, which_month)
+        self.render('queryStatistics.html', statisticsdata = statisticsdata, which_year = which_year, which_month = which_month)
+
+class QueryDetailByTaxdepartmentHandler(tornado.web.RequestHandler):
+    def get(self):
+        taxdepartments = db_fucker.get_all_taxdepartments()
+        print '$$$$$$$$$$$$$$$$$$$$$$$$$$$$$'
+        for sb in taxdepartments:
+            print type(sb.id)
+            print type(sb.name)
+            print
+
+        print '$$$$$$$$$$$$$$$$$$$$$$$$$$$$$'
+        print
+        print
+        self.render('queryDetailByTaxdepartment.html', taxdepartments = taxdepartments, taxdetails = None)
+
+    def post(self):
+        which_year = int(self.get_argument('which_year'))
+        which_month = int(self.get_argument('which_month'))
+        taxdepartment_id = int(self.get_argument('taxdepartment_id'))
+        taxdetails = db_fucker.get_taxdetails_by_year_and_month_and_taxdepartment_id(which_year, which_month, taxdepartment_id)
+        taxdepartments = db_fucker.get_all_taxdepartments()
+        self.render('queryDetailByTaxdepartment.html', taxdepartments = taxdepartments, taxdetails = taxdetails)
+
+
+
 
 def main():
     tornado.options.parse_command_line()

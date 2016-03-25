@@ -1,160 +1,160 @@
 {% extends "base.html" %}
 
 {% block body %}
-	<h1>this is import </h1>
-	
-	<form action="/upload_file" enctype="multipart/form-data" method="post">
-		<input name="myfile" type="file">
-		<input value="upload" type="submit">
-	</form>
-	<br/>
+<h1>this is import </h1>
 
-	<form action="/import" method="post">
-		<label for="sheet_select_id" >sheets</label>
-		<select name="sheet_id" id="sheet_select_id">
-			{% if sheet_names %}
-				{% for index, sheet_name in enumerate(sheet_names) %}
-					<option value ="{{index}}">{{ sheet_name }}</option>	
-				{% end %}
-			{% end %}
-		</select>
-		<br />
+<form action="/upload_file" enctype="multipart/form-data" method="post">
+	<input name="myfile" type="file">
+	<input value="upload" type="submit">
+</form>
+<br/>
 
-		<table>
-			<tr>
-				<td>税款所属税务机构</td>
-				<td>
-					<select name = "taxdepartment" >
-						{% if data %}
-							{% for index, title in enumerate(data[0][0]) %}
-								<option value ="{{index}}">{{ title }}</option>
-							{% end %}
-						{% end %}
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>主管税务所（科、分局）</td>
-				<td>
-					<select name = "taxation" >
-						{% if data %}
-							{% for index, title in enumerate(data[0][0]) %}
-								<option value ="{{index}}">{{ title }}</option>
-							{% end %}
-						{% end %}
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>纳税人识别号</td>
-				<td>
-					<select name = "taxpayer_code">
-						{% if data %}
-							{% for index, title in enumerate(data[0][0]) %}
-								<option value ="{{index}}">{{ title }}</option>
-							{% end %}
-						{% end %}
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>纳税人名称</td>
-				<td>
-					<select name = "taxpayer_name">
-						{% if data %}
-							{% for index, title in enumerate(data[0][0]) %}
-								<option value ="{{index}}">{{ title }}</option>
-							{% end %}
-						{% end %}
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>电子税票号码</td>
-				<td>
-					<select name = "taxcode">
-						{% if data %}
-							{% for index, title in enumerate(data[0][0]) %}
-								<option value ="{{index}}">{{ title }}</option>
-							{% end %}
-						{% end %}
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>实缴金额</td>
-				<td>
-					<select name = "taxmoney">
-						{% if data %}
-							{% for index, title in enumerate(data[0][0]) %}
-								<option value ="{{index}}">{{ title }}</option>
-							{% end %}
-						{% end %}
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>税款所属期起</td>
-				<td>
-					<select name = "tax_belong_start_date">
-						{% if data %}
-							{% for index, title in enumerate(data[0][0]) %}
-								<option value ="{{index}}">{{ title }}</option>
-							{% end %}
-						{% end %}
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>税款所属期止</td>
-				<td>
-					<select name = "tax_belong_end_date">
-						{% if data %}
-							{% for index, title in enumerate(data[0][0]) %}
-								<option value ="{{index}}">{{ title }}</option>
-							{% end %}
-						{% end %}
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>录入日期</td>
-				<td>
-					<select name = "record_datetime">
-						{% if data %}
-							{% for index, title in enumerate(data[0][0]) %}
-								<option value ="{{index}}">{{ title }}</option>
-							{% end %}
-						{% end %}
-					</select>
-				</td>
-			</tr>
-			<tr></tr>
-			<tr>
-				<td>导入年份</td>
-				<td>
-					<select name="which_year">
-						{% for i in range(2015, 2020) %}
-							<option value ="{{i}}">{{ i }}</option>
-						{% end %}
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>导入月份</td>
-				<td>
-					<select name="which_month">
-						{% for i in range(1, 13) %}
-							<option value ="{{i}}">{{ i }}</option>
-						{% end %}
-					</select>
-				</td>
-			</tr>
-		</table>
-		<input type="hidden" name="filename" value="{{ filename }}">
-		<input value="导入" type="submit">
-	</form>
-	
+<form action="/import" method="post">
+	<label for="sheet_select_id" >sheets</label>
+	<select name="sheet_id" id="sheet_select_id">
+		{% if sheet_names %}
+		{% for index, sheet_name in enumerate(sheet_names) %}
+		<option value ="{{index}}">{{ sheet_name }}</option>	
+		{% end %}
+		{% end %}
+	</select>
+	<br />
+
+	<table>
+		<tr>
+			<td>税款所属税务机构</td>
+			<td>
+				<select name = "taxdepartment" >
+					{% if data %}
+					{% for index, title in enumerate(data[0][0]) %}
+					<option value ="{{index}}">{{ title }}</option>
+					{% end %}
+					{% end %}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>主管税务所（科、分局）</td>
+			<td>
+				<select name = "taxation" >
+					{% if data %}
+					{% for index, title in enumerate(data[0][0]) %}
+					<option value ="{{index}}">{{ title }}</option>
+					{% end %}
+					{% end %}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>纳税人识别号</td>
+			<td>
+				<select name = "taxpayer_code">
+					{% if data %}
+					{% for index, title in enumerate(data[0][0]) %}
+					<option value ="{{index}}">{{ title }}</option>
+					{% end %}
+					{% end %}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>纳税人名称</td>
+			<td>
+				<select name = "taxpayer_name">
+					{% if data %}
+					{% for index, title in enumerate(data[0][0]) %}
+					<option value ="{{index}}">{{ title }}</option>
+					{% end %}
+					{% end %}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>电子税票号码</td>
+			<td>
+				<select name = "taxcode">
+					{% if data %}
+					{% for index, title in enumerate(data[0][0]) %}
+					<option value ="{{index}}">{{ title }}</option>
+					{% end %}
+					{% end %}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>实缴金额</td>
+			<td>
+				<select name = "taxmoney">
+					{% if data %}
+					{% for index, title in enumerate(data[0][0]) %}
+					<option value ="{{index}}">{{ title }}</option>
+					{% end %}
+					{% end %}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>税款所属期起</td>
+			<td>
+				<select name = "tax_belong_start_date">
+					{% if data %}
+					{% for index, title in enumerate(data[0][0]) %}
+					<option value ="{{index}}">{{ title }}</option>
+					{% end %}
+					{% end %}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>税款所属期止</td>
+			<td>
+				<select name = "tax_belong_end_date">
+					{% if data %}
+					{% for index, title in enumerate(data[0][0]) %}
+					<option value ="{{index}}">{{ title }}</option>
+					{% end %}
+					{% end %}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>录入日期</td>
+			<td>
+				<select name = "record_datetime">
+					{% if data %}
+					{% for index, title in enumerate(data[0][0]) %}
+					<option value ="{{index}}">{{ title }}</option>
+					{% end %}
+					{% end %}
+				</select>
+			</td>
+		</tr>
+		<tr></tr>
+		<tr>
+			<td>导入年份</td>
+			<td>
+				<select name="which_year">
+					{% for i in range(2015, 2020) %}
+					<option value ="{{i}}">{{ i }}</option>
+					{% end %}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>导入月份</td>
+			<td>
+				<select name="which_month">
+					{% for i in range(1, 13) %}
+					<option value ="{{i}}">{{ i }}</option>
+					{% end %}
+				</select>
+			</td>
+		</tr>
+	</table>
+	<input type="hidden" name="filename" value="{{ filename }}">
+	<input value="导入" type="submit">
+</form>
+
 
 
 {% end %}

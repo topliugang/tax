@@ -73,7 +73,24 @@ def get_taxdepartment_by_id(id):
     except MySQLdb.Error, e:
         print 'mysql error %d: %s'%(e.args[0], e.args[1])
     finally:
-        close_db(cur, conn)    
+        close_db(cur, conn)   
+
+def get_all_taxdepartments():
+    print 'get_all_taxdepartments'
+    try:
+        cur, conn = init_db()
+        cur.execute('select id, name from taxdepartment ')
+        result = cur.fetchall()
+        taxdepartments = []
+        for row in result:
+            taxdepartment = Taxdepartment(result[0], result[1])
+            taxdepartments.append(taxdepartment)
+        return taxdepartments
+    except MySQLdb.Error, e:
+        print 'mysql error %d: %s'%(e.args[0], e.args[1])
+    finally:
+        close_db(cur, conn)   
+
 
 ####Taxation###############################################################
 def get_taxation_by_id(id):
@@ -194,6 +211,45 @@ def get_taxdetails_by_year_and_month(which_year, which_month):
         close_db(cur, conn) 
 
 
+def get_taxdetails_by_year_and_month_and_taxdepartment_id(which_year, which_month, taxdepartment_id):     
+    print 'get_taxdetail_data_by_year_and_month'
+    try:
+        cur, conn = init_db()
+        sql = """
+            select id, taxdepartment_id, taxation_id, taxcode, taxpayer_id, taxmoney, 
+            tax_belong_start_date, tax_belong_end_date, record_datetime, which_year, 
+            which_month, upload_user_id, upload_date from taxdetail
+            where which_year = %s and which_month = %s and taxdepartment_id = %s
+        """
+        cur.execute(sql, (which_year, which_month, taxdepartment_id))
+        result = cur.fetchall()
+        taxdetails = []
+        for row in result:
+            taxdepartment = get_taxdepartment_by_id(row[1])
+            taxation = get_taxation_by_id(row[2])
+            taxpayer = get_taxpayer_by_id(row[4])
+            user = get_user_by_id(row[11])
+            taxdetail = Taxdetail(row[0], 
+                taxdepartment,
+                taxation, 
+                row[3], 
+                taxpayer, 
+                row[5],
+                row[6], 
+                row[7], 
+                row[8], 
+                row[9], 
+                row[10], 
+                user, 
+                row[12])
+            taxdetails.append(taxdetail)
+        return taxdetails
+    except MySQLdb.Error, e:
+        print 'mysql error %d: %s'%(e.args[0], e.args[1])
+    finally:
+        close_db(cur, conn)         
+
+
 def insert_tax_detail(data, which_year, which_month, user_id):
     print 'insert_tax_detail'
     try:
@@ -213,8 +269,8 @@ def insert_tax_detail(data, which_year, which_month, user_id):
         close_db(cur, conn)
         
 
-def get_tax_class_data(which_year, which_month):
-    print 'get_tax_class_data'
+def get_tax_statistics_data(which_year, which_month):
+    print 'get_tax_statistics_data'
     try:
         cur, conn = init_db()
         sql = """

@@ -3,7 +3,7 @@
 {% block body %}
 
 <div class="container-fluid">
-	<form class="form-inline" action="/queryDetailByTaxdepartment" role="search" method="post">
+	<form class="form-inline" action="/query_class" role="search" method="post">
 		<!-- <div class="form-group"> -->
 		<label for="name">选择年份</label>
 		<select name="which_year" class="form-control">
@@ -19,7 +19,7 @@
 
 		<select name="taxdepartments" class="form-control">
 			{% for index, taxdepartment in enumerate(taxdepartments) %}
-			<option value="{{index}}">{{taxdepartment.name}}</option>
+			<option value="{{taxdepartment.id}}">{{taxdepartment.name}}</option>
 			{% end %}
 		</select>
 		<button type="submit" class="btn btn-default form-control">查询</button>

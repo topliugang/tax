@@ -9,11 +9,13 @@
   <!-- Bootstrap -->
   <link href="{{ static_url("css/bootstrap.css") }}" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="{{ static_url("css/tax.css") }}">
-   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <link rel="stylesheet" type="text/css" href="{{ static_url("css/bootstrap-table.css") }}">
+
+
   <script src="{{ static_url("js/jquery-1.12.2.js") }}"></script>
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="{{ static_url("js/bootstrap.js") }}"></script>
   <script src="{{ static_url("js/jquery.table2excel.js") }}"></script>
+  <script src="{{ static_url("js/bootstrap-table.js") }}"></script>
   {% block head %}{% end %}
 </head>
 <body>
@@ -45,8 +47,9 @@
         <ul class="nav nav-sidebar">
           <li class="active"><a href="/main">主页 <span class="sr-only">(current)</span></a></li>
           <li><a href="/import">导入</a></li>
-          <li><a href="/query_detail">查询明细</a></li>
-          <li><a href="/query_class">分类查询</a></li>
+          <li><a href="/query_detail">明细查询</a></li>
+          <li><a href="/query_statistics">统计查询</a></li>
+          <li><a href="/query_detail_by_taxdepartment">分类明细查询</a></li>
         </ul>
       </div>
 
