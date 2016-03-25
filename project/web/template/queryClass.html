@@ -19,12 +19,14 @@
 			{% end %}
 		</select>
 
-		<button type="submit" class="btn btn-default form-control">查询</button>
+
 		
+		<button type="submit" class="btn btn-default form-control">查询</button>
+
 
 	</form>
-	<button id="exportBtn">Export</button>
-	
+
+
 
 
 	<h2 class="sub-header text-center">查询结果</h2>
@@ -56,10 +58,10 @@
 					<td>金额</td>
 					<td>其中，市级</td>
 				</tr>
-				
+
 				{% if taxclassdata %}
-					{% for row in taxclassdata %}
-					<tr>
+				{% for row in taxclassdata %}
+				<tr>
 					<td>{{row[0].name}}</td>
 					<td>{{row[1]}}</td>
 					<td>{{row[2]}}</td>
@@ -69,7 +71,7 @@
 					<td>{{row[6]}}</td>
 					<td>{{row[7]}}</td>
 					<td>{{row[8]}}</td>
-		
+
 				</tr>
 				{%end%}
 				{%end%}
@@ -77,20 +79,23 @@
 		</table>
 	</div>	
 
+	<button id="exportBtn" type="button" class="btn btn-default btn-lg active">Button</button>	
 </div>
 
+
+
 <script type="text/javascript">
-$("#exportBtn").click(function(){
-  $(".table2excel").table2excel({
-	exclude: ".noExl",
-	name: "Excel Document Name",
-	filename: "export",
-	fileext: ".xls",
-	exclude_img: true,
-	exclude_links: true,
-	exclude_inputs: true
-});
-});
+	$("#exportBtn").click(function(){
+		$(".table2excel").table2excel({
+			exclude: ".noExl",
+			name: "Excel Document Name",
+			filename: "export",
+			fileext: ".xls",
+			exclude_img: true,
+			exclude_links: true,
+			exclude_inputs: true
+		});
+	});
 
 </script>
 
