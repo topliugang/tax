@@ -83,7 +83,7 @@ def get_all_taxdepartments():
         result = cur.fetchall()
         taxdepartments = []
         for row in result:
-            taxdepartment = Taxdepartment(result[0], result[1])
+            taxdepartment = Taxdepartment(row[0], row[1])
             taxdepartments.append(taxdepartment)
         return taxdepartments
     except MySQLdb.Error, e:

@@ -167,15 +167,6 @@ class QueryStatisticsHandler(tornado.web.RequestHandler):
 class QueryDetailByTaxdepartmentHandler(tornado.web.RequestHandler):
     def get(self):
         taxdepartments = db_fucker.get_all_taxdepartments()
-        print '$$$$$$$$$$$$$$$$$$$$$$$$$$$$$'
-        for sb in taxdepartments:
-            print type(sb.id)
-            print type(sb.name)
-            print
-
-        print '$$$$$$$$$$$$$$$$$$$$$$$$$$$$$'
-        print
-        print
         self.render('queryDetailByTaxdepartment.html', taxdepartments = taxdepartments, taxdetails = None)
 
     def post(self):
