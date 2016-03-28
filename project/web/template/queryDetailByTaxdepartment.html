@@ -3,7 +3,7 @@
 {% block body %}
 
 <div class="container-fluid">
-	<form class="form-inline" action="/query_class" role="search" method="post">
+	<form class="form-inline" action="/query_detail_by_taxdepartment" role="search" method="post">
 		<!-- <div class="form-group"> -->
 		<label for="name">选择年份</label>
 		<select name="which_year" class="form-control">
@@ -17,7 +17,7 @@
 			{% end %}
 		</select>
 
-		<select name="taxdepartments" class="form-control">
+		<select name="taxdepartment_id" class="form-control">
 			{% for index, taxdepartment in enumerate(taxdepartments) %}
 			<option value="{{taxdepartment.id}}">{{taxdepartment.name}}</option>
 			{% end %}

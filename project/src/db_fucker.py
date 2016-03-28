@@ -5,7 +5,7 @@ from objects import *
 
 def init_db():
     #最后一个参数需要带 
-    conn = MySQLdb.connect(host='127.0.0.1', user='root', passwd='liugang', \
+    conn = MySQLdb.connect(host='192.168.1.103', user='root', passwd='liugang', \
         db='tax', port=3306, charset='utf8')
     cur = conn.cursor()
     return cur, conn
