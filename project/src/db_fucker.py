@@ -5,7 +5,7 @@ from objects import *
 
 def init_db():
     #最后一个参数需要带 
-    conn = MySQLdb.connect(host='192.168.1.103', user='root', passwd='liugang', \
+    conn = MySQLdb.connect(host='127.0.0.1', user='root', passwd='liugang', \
         db='tax', port=3306, charset='utf8')
     cur = conn.cursor()
     return cur, conn
@@ -52,9 +52,12 @@ def get_user_by_username_and_password(username, password):
         cur.execute('select id, name, username, password, role_id from user where username = %s and password = %s',\
          (username, password))
         result = cur.fetchone()
-        role = get_role_by_id(result[4])
-        user = User(result[0], result[1], result[2], result[3], role )
-        return user
+        if result:
+            role = get_role_by_id(result[4])
+            user = User(result[0], result[1], result[2], result[3], role )
+            return user
+        else:
+            return None
     except MySQLdb.Error, e:
         print 'mysql error %d: %s'%(e.args[0], e.args[1])
 

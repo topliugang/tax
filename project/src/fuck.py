@@ -36,7 +36,7 @@ class Application(tornado.web.Application):
             (r'/query_detail_by_taxdepartment', QueryDetailByTaxdepartmentHandler),
         ]
         settings = dict(
-            fucktitle = u"税务统计系统",
+            fucktitle = u"工会会费统计系统",
             template_path=os.path.join(os.path.dirname(__file__),'../web/template'),
             static_path=os.path.join(os.path.dirname(__file__),'../web/static'),
             upload_file=os.path.join(os.path.dirname(__file__),'../upload'),
@@ -166,8 +166,16 @@ class QueryStatisticsHandler(tornado.web.RequestHandler):
 
 class QueryDetailByTaxdepartmentHandler(tornado.web.RequestHandler):
     def get(self):
+        #taxdepartments = db_fucker.get_all_taxdepartments()
+        #self.render('queryDetailByTaxdepartment.html', taxdepartments = taxdepartments, taxdetails = None)
+        
+        which_year = int(self.get_argument('which_year'))
+        which_month = int(self.get_argument('which_month'))
+        taxdepartment_id = int(self.get_argument('taxdepartment_id'))
+        taxdetails = db_fucker.get_taxdetails_by_year_and_month_and_taxdepartment_id(which_year, which_month, taxdepartment_id)
         taxdepartments = db_fucker.get_all_taxdepartments()
-        self.render('queryDetailByTaxdepartment.html', taxdepartments = taxdepartments, taxdetails = None)
+        self.render('queryDetailByTaxdepartment.html', taxdepartments = taxdepartments, taxdetails = taxdetails)
+
 
     def post(self):
         which_year = int(self.get_argument('which_year'))

@@ -4,26 +4,26 @@
 
 
 <!-- h3>your username:{{username}}</h3><br />
-<h3>your name:{{name}}</h3><br / -->
- <div class="jumbotron">
-  <div class="container">
-    <h1>{{ escape(handler.settings["fucktitle"]) }}</h1>
-    <p>这是一个非常牛逼的系统</p>
-  </div>
-</div>
-<div class="container">
-  <!-- Example row of columns -->
-  <div class="row">
-    <div class="col-md-4">
-      <h2>excel表格导入</h2>
-      <p>导入数据导入数据导入数据导入数据导入数据导入数据导入数据导入数据导入数据</p>
-      <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+  <h3>your name:{{name}}</h3><br / -->
+  <div class="jumbotron">
+    <div class="container">
+      <h1>{{ escape(handler.settings["fucktitle"]) }}</h1>
+      <p>这是一个非常牛逼的系统</p>
     </div>
-    <div class="col-md-4">
-      <h2>查询明细</h2>
-      <p>查询明细查询明细查询明细查询明细查询明细查询明细查询明细查询明细查询明细查询明细查询明细</p>
-      <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-   </div>
+  </div>
+  <div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+      <div class="col-md-4">
+        <h2>excel表格导入</h2>
+        <p>导入数据导入数据导入数据导入数据导入数据导入数据导入数据导入数据导入数据</p>
+        <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+      </div>
+      <div class="col-md-4">
+        <h2>查询明细</h2>
+        <p>查询明细查询明细查询明细查询明细查询明细查询明细查询明细查询明细查询明细查询明细查询明细</p>
+        <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+      </div>
    <!--  <div class="col-md-4">
       <h2>分类查询</h2>
       <p>分类查询分类查询分类查询分类查询分类查询分类查询分类查询分类查询分类查询分类查询</p>
@@ -33,6 +33,13 @@
 
   <hr>
 </div>
+
+<script type="text/javascript">
+
+ $(document).ready(function(){
+  $("#li0").addClass("active");
+  });
+</script>
 
 
 {% end %}

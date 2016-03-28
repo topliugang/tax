@@ -7,13 +7,13 @@
 
 		<!-- <div class="form-group"> -->
 		<label for="name">选择年份</label>
-		<select name="which_year" class="form-control">
+		<select name="which_year" id="which_year" class="form-control">
 			{% for i in range(2015, 2020) %}
 			<option value ="{{i}}">{{ i }}</option>
 			{% end %}
 		</select>
 
-		<select name="which_month" class="form-control">
+		<select name="which_month" id="which_month" class="form-control">
 			{% for i in range(1, 13) %}
 			<option value ="{{i}}">{{ i }}</option>
 			{% end %}
@@ -23,6 +23,8 @@
 		
 		<button type="submit" class="btn btn-default form-control">查询</button>
 
+		<button id="exportBtn" type="button" class="btn btn-default text-right">导出EXCEL</button>	
+
 
 	</form>
 
@@ -30,73 +32,68 @@
 
 
 	<h2 class="sub-header text-center">查询结果</h2>
-	<div class="table-responsive">
-		<table data-toggle="table" class="table2excel">
-			<thead>
-				<caption>枣庄市地税局工会经费代收情况统计表</caption>
-				<tr>
-					<td>填表单位：</td>
-					<td colspan="6">所属时期：{{ which_year }}年{{ which_month }}月</td>
-					<td colspan="2">单位：万元</td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td rowspan="2">代收项目</td>
-					<td colspan="2">本月征收</td>
-					<td colspan="2">累计征收</td>
-					<td colspan="2">去年同期征收</td>
-					<td colspan="2">同比增长%（累计）</td>
-				</tr>
-				<tr>
-					<td>金额</td>
-					<td>其中，市级</td>
-					<td>金额</td>
-					<td>其中，市级</td>
-					<td>金额</td>
-					<td>其中，市级</td>
-					<td>金额</td>
-					<td>其中，市级</td>
-				</tr>
+	<table data-toggle="table" class="table table-hover table-striped table2excel">
+		<thead>
+			<!-- caption>枣庄市地税局工会经费代收情况统计表</caption -->
+			<tr>
+				<td colspan="9">枣庄市地税局工会经费代收情况统计表</td>
+			</tr>
+			<tr>
+				<td>填表单位：</td>
+				<td colspan="6">所属时期：{{ which_year }}年{{ which_month }}月</td>
+				<td colspan="2">单位：万元</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td rowspan="2">代收项目</td>
+				<td colspan="2">本月征收</td>
+				<td colspan="2">累计征收</td>
+				<td colspan="2">去年同期征收</td>
+				<td colspan="2">同比增长%（累计）</td>
+			</tr>
+			<tr>
+				<td>金额</td>
+				<td>其中，市级</td>
+				<td>金额</td>
+				<td>其中，市级</td>
+				<td>金额</td>
+				<td>其中，市级</td>
+				<td>金额</td>
+				<td>其中，市级</td>
+			</tr>
 
-				{% if statisticsdata %}
-				{% for row in statisticsdata %}
-				<tr>
-					<td>{{row[0].name}}</td>
-					<td>{{row[1]}}</td>
-					<td>{{row[2]}}</td>
-					<td>{{row[3]}}</td>
-					<td>{{row[4]}}</td>
-					<td>{{row[5]}}</td>
-					<td>{{row[6]}}</td>
-					<td>{{row[7]}}</td>
-					<td>{{row[8]}}</td>
+			{% if statisticsdata %}
+			{% for row in statisticsdata %}
+			<tr>
+				<td>
+					<a href="#" onclick="this.href='/query_detail_by_taxdepartment?which_year='+document.getElementById('which_year').value+'\&which_month='+document.getElementById('which_month').value+'\&taxdepartment_id={{row[0].id}}'">
+						{{row[0].name}}
+					</a>
+				</td>
+				<td>{{row[1]}}</td>
+				<td>{{row[2]}}</td>
+				<td>{{row[3]}}</td>
+				<td>{{row[4]}}</td>
+				<td>{{row[5]}}</td>
+				<td>{{row[6]}}</td>
+				<td>{{row[7]}}</td>
+				<td>{{row[8]}}</td>
 
-				</tr>
-				{%end%}
-				{%end%}
-			</tbody>
-		</table>
-	</div>	
-
-	<button id="exportBtn" type="button" class="btn btn-default btn-lg active">Button</button>	
+			</tr>
+			{%end%}
+			{%end%}
+		</tbody>
+	</table>
 </div>
 
 
 
 <script type="text/javascript">
-	$("#exportBtn").click(function(){
-		$(".table2excel").table2excel({
-			exclude: ".noExl",
-			name: "Excel Document Name",
-			filename: "export",
-			fileext: ".xls",
-			exclude_img: true,
-			exclude_links: true,
-			exclude_inputs: true
-		});
-	});
 
+	$(document).ready(function(){
+		$("#li3").addClass("active");
+	});
 </script>
 
 

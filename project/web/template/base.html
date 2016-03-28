@@ -9,13 +9,13 @@
   <!-- Bootstrap -->
   <link href="{{ static_url("css/bootstrap.css") }}" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="{{ static_url("css/tax.css") }}">
-  <link rel="stylesheet" type="text/css" href="{{ static_url("css/bootstrap-table.css") }}">
+  <!-- link rel="stylesheet" type="text/css" href="{{ static_url("css/bootstrap-table.css") }}"-->
 
 
   <script src="{{ static_url("js/jquery-1.12.2.js") }}"></script>
   <script src="{{ static_url("js/bootstrap.js") }}"></script>
   <script src="{{ static_url("js/jquery.table2excel.js") }}"></script>
-  <script src="{{ static_url("js/bootstrap-table.js") }}"></script>
+  <!--script src="{{ static_url("js/bootstrap-table.js") }}"></script-->  
   {% block head %}{% end %}
 </head>
 <body>
@@ -45,11 +45,11 @@
       <!-- left nav -->
       <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-          <li class="active"><a href="/main">主页 <span class="sr-only">(current)</span></a></li>
-          <li><a href="/import">导入</a></li>
-          <li><a href="/query_detail">明细查询</a></li>
-          <li><a href="/query_statistics">统计查询</a></li>
-          <li><a href="/query_detail_by_taxdepartment">分类明细查询</a></li>
+          <li id="li0"><a href="/main">主页 <span class="sr-only">(current)</span></a></li>
+          <li id="li1"><a href="/import">导入</a></li>
+          <li id="li2"><a href="/query_detail">明细查询</a></li>
+          <li id="li3"><a href="/query_statistics">统计查询</a></li>
+          <li id="li4"><a href="/query_detail_by_taxdepartment?which_year=2015&which_month=1&taxdepartment_id=1">分类明细查询</a></li>
         </ul>
       </div>
 
@@ -60,10 +60,29 @@
       </div>
     </div>
   </div>
- 
+  
   {% block bottom %}{% end %}
   <footer>
     <p>&copy; 中广有线枣庄分公司</p>
   </footer>
+
+
+
+  <script type="text/javascript">
+    $("#exportBtn").click(function(){
+      $(".table2excel").table2excel({
+        exclude: ".noExl",
+        name: "Excel Document Name",
+        filename: "export",
+        fileext: ".xls",
+        exclude_img: true,
+        exclude_links: true,
+        exclude_inputs: true
+      });
+    });
+
+  </script>
+
+
 </body>
 </html>
