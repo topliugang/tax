@@ -166,12 +166,15 @@ class QueryStatisticsHandler(tornado.web.RequestHandler):
 
 class QueryDetailByTaxdepartmentHandler(tornado.web.RequestHandler):
     def get(self):
-        #taxdepartments = db_fucker.get_all_taxdepartments()
-        #self.render('queryDetailByTaxdepartment.html', taxdepartments = taxdepartments, taxdetails = None)
-        
         which_year = int(self.get_argument('which_year'))
         which_month = int(self.get_argument('which_month'))
         taxdepartment_id = int(self.get_argument('taxdepartment_id'))
+        
+        print 'caonimacaonimacaonimacaonimacaonimacaonimacaonimacaonimacaonimacaonimacaonimacaonima'
+        print 'which_year',which_year
+        print 'which_month', which_month
+        print 'taxdepartment_id',taxdepartment_id
+
         taxdetails = db_fucker.get_taxdetails_by_year_and_month_and_taxdepartment_id(which_year, which_month, taxdepartment_id)
         taxdepartments = db_fucker.get_all_taxdepartments()
         self.render('queryDetailByTaxdepartment.html', taxdepartments = taxdepartments, taxdetails = taxdetails)

@@ -24,6 +24,7 @@
 		<button type="submit" class="btn btn-default form-control">查询</button>
 
 		<button id="exportBtn" type="button" class="btn btn-default text-right">导出EXCEL</button>	
+		<button id="fuck" type="button" class="btn btn-default text-right">fuck</button>	
 
 
 	</form>
@@ -67,7 +68,12 @@
 			{% for row in statisticsdata %}
 			<tr>
 				<td>
-					<a href="#" onclick="this.href='/query_detail_by_taxdepartment?which_year='+document.getElementById('which_year').value+'\&which_month='+document.getElementById('which_month').value+'\&taxdepartment_id={{row[0].id}}'">
+					<a id="linkkk" href="#" onclick="this.href=
+					'/query_detail_by_taxdepartment?which_year='+
+					document.getElementById('which_year').value+
+					'&which_month='+
+					document.getElementById('which_month').value+
+					'&taxdepartment_id={{row[0].id}}' ">
 						{{row[0].name}}
 					</a>
 				</td>
@@ -93,7 +99,20 @@
 
 	$(document).ready(function(){
 		$("#li3").addClass("active");
+		$("#fuck").click(function(){
+			sb = $("#linkkk").attr("href");
+			alert(sb);
+		});
+
+
+
 	});
+
+
+
+
+
+
 </script>
 
 
